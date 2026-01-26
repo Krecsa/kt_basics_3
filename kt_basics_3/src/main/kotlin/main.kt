@@ -3,25 +3,20 @@ fun main() {
     val regularClient = true
 
     val finalPrice = calculateFinalPrice(amountRub, regularClient)
-    println("Итоговая стоимость покупки: " + finalPrice + " руб.")
+    println("Итоговая стоимость покупки: $finalPrice руб.")
 }
 
 fun calculateFinalPrice(amount: Int, regularClient: Boolean): Int {
-    var discountedAmount: Int
+    val baseDiscountedAmount = when {
+        amount <= 0 -> 0
+        amount <= 1000 -> amount
+        amount <= 10000 -> amount - 100 // скидка 100 руб.
+        else -> (amount * 0.95).toInt() // 5% скидка
+    }
 
-    if (amount <= 0) {
-        discountedAmount = 0
-    } else if (amount <= 1000) {
-        discountedAmount = amount
-    } else if (amount <= 10000) {
-        discountedAmount = amount - 100 // скидка 100 руб.
+    return if (regularClient) {
+        (baseDiscountedAmount * 0.99).toInt()
     } else {
-        discountedAmount = (amount * 0.95).toInt() // 5% скидка
+        baseDiscountedAmount
     }
-
-    if (regularClient) {
-        discountedAmount = (discountedAmount * 0.99).toInt()
-    }
-
-    return discountedAmount
 }

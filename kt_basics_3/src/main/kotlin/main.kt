@@ -22,16 +22,6 @@ fun calculateCommission(
 
     val dailyTotal = dailySpent + amount
     val monthlyTotal = monthlySpent + amount
-
-    if (dailyTotal > 150000) {
-        println("Ошибка: превышен дневной лимит $dailyTotal руб.")
-        return
-    }
-    if (monthlyTotal > 600000) {
-        println("Ошибка: превышен месячный лимит $monthlyTotal руб.")
-        return
-    }
-
     var commission = 0
 
     if (cardType == "mir") {
@@ -62,3 +52,4 @@ fun calculateCommission(
     println("Комиссия составляет: $commission руб.")
     println("Итого к списанию: $totalAmount руб.")
 }
+
